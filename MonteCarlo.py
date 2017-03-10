@@ -15,7 +15,7 @@ class MonteCarlo:
     wynik = 0;
     iterator = 0;
 
-    def breakup(self):
+    def __breakup__(self):
         for event in pygame.event.get():  # event_loop
             if event.type == pygame.QUIT:
                 gameExit = True;
@@ -35,7 +35,7 @@ class MonteCarlo:
 
     def calulatePi(self):
 
-        while not (self.breakup()):
+        while not (self.__breakup__()):
 
             self.iterator = self.iterator + 1;
             # losuje punkt

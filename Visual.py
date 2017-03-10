@@ -4,19 +4,31 @@ import MonteCarlo;
 
 class Visual:
     gameExit = False;
+    clock = 0;
+    pygame.init();
+
+    FPS = 60;
+
+    white = (255, 255, 255)
+    black = (0, 0, 0)
+    red = (255, 0, 0)
+    green = (0, 255, 0)
+    blue = (0, 0, 255)
+    window_width = 1000;
+    window_height = 1000;
+
+    myfont = pygame.font.SysFont("monospace", 15)
+    podpis = myfont.render("Mikolaj Balcerek s416040", 1, (0, 0, 0))
 
     def __init__ (self):
-        pygame.init();
-        window_width = 1000;
-        window_height = 1000;
-        FPS = 60;
-        gameDisplay = pygame.display.set_mode((window_width, window_height), pygame.RESIZABLE)
+        gameDisplay = pygame.display.set_mode((self.window_width, self.window_height), pygame.RESIZABLE)
         pygame.display.set_caption('Pi Monte Carlo Mikolaj Balcerek s416040')
-        clock = pygame.time.Clock();
-        self.init_draw();
+        self.clock = pygame.time.Clock();
+        gameDisplay.fill(self.white);
+        gameDisplay.blit(self.podpis, (0, 0));
+        pygame.display.update();
+        self.clock.tick(self.FPS);
 
-    def init_draw(self):
-        a = 1;
 
     def loop_wizualizacja(self, MonteCarlo):
         while not self.gameExit:  # game_loop
@@ -39,11 +51,7 @@ class Visual:
                         MonteCarlo.calulatePi();
 
 
-
-
-
                 if event.type == pygame.VIDEORESIZE:
-                    window = pygame.display.set_mode((event.w, event.h),
-                                                      pygame.RESIZABLE);
-        pygame.display.update();
-        clock.tick(FPS);
+                    self.window_height = event.h;
+                    self.window_width = event.w;
+                    self.__init__();
