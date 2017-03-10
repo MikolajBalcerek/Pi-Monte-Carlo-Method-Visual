@@ -1,6 +1,8 @@
 from __future__ import division;
 import random;
 import math;
+import pygame;
+import sys;
 
 class MonteCarlo:
 
@@ -11,10 +13,31 @@ class MonteCarlo:
     Count_hit = 0;
     Count_overall = 0;
     wynik = 0;
+    iterator = 0;
+
+    def breakup(self):
+        for event in pygame.event.get():  # event_loop
+            if event.type == pygame.QUIT:
+                gameExit = True;
+                pygame.quit();
+                quit();
+                sys.quit();
+
+            if event.type == pygame.KEYDOWN:
+                # CZAT
+                if event.key == pygame.K_ESCAPE or event.key == pygame.K_q:
+                    gameExit = True;
+                    pygame.quit();
+                    quit();
+                    sys.quit();
+                if event.key == pygame.K_KP_ENTER or event.key == pygame.K_SPACE or event.key == pygame.K_s:
+                    return True;
 
     def calulatePi(self):
-        for iterator in range(0, 1000000, 1):
 
+        while not (self.breakup()):
+
+            self.iterator = self.iterator + 1;
             # losuje punkt
             point = (random.uniform(self.center[0], self.center[0] + self.r), random.uniform(self.center[1], self.center[1] + self.r));
             # print "Wylosowany punkt: " , "\n X:", point[0], "\n Y:", point[1];
@@ -29,8 +52,9 @@ class MonteCarlo:
 
             self.Count_overall = self.Count_overall + 1;
 
-            if (iterator % 100000 == 0):
-                print "Ciagle licze, jestem na..", iterator;
+            if (self.iterator % 100000 == 0):
+                print "Ciagle licze, jestem na..", self.iterator;
 
-        self.wynik = 4 * (self.Count_hit / self.Count_overall);
-        print self.wynik;
+        if (self.Count_overall !=0):
+            self.wynik = 4 *(self.Count_hit / self.Count_overall);
+            print self.wynik;
