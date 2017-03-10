@@ -18,15 +18,16 @@ class Visual:
             for event in pygame.event.get():  # event_loop
                 if event.type == pygame.QUIT:
                     gameExit = True
+                    sys.exit();
                 if event.type == pygame.KEYDOWN:
                     # CZAT
-                    if event.key == pygame.K_ESCAPE:
+                    if event.key == pygame.K_ESCAPE or event.key == pygame.K_q:
                         gameExit = True
                         sys.exit();
                 if event.type == pygame.VIDEORESIZE:
-                    surface = pygame.display.set_mode((event.w, event.h),
+                    window = pygame.display.set_mode((event.w, event.h),
                                                       pygame.RESIZABLE);
-        pygame.display.update()
+        pygame.display.update();
         clock.tick(FPS);
         pygame.quit();
         quit();
