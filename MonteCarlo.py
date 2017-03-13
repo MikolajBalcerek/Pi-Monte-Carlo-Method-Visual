@@ -3,6 +3,7 @@ import random;
 import math;
 import pygame;
 import sys;
+import __main__
 
 class MonteCarlo:
 
@@ -33,7 +34,7 @@ class MonteCarlo:
                 if event.key == pygame.K_KP_ENTER or event.key == pygame.K_SPACE or event.key == pygame.K_s:
                     return True;
 
-    def calulatePi(self):
+    def calulatePi(self, Visual):
 
         while not (self.__breakup__()):
 
@@ -53,7 +54,16 @@ class MonteCarlo:
             self.Count_overall = self.Count_overall + 1;
 
             if (self.iterator % 100000 == 0):
+                if (self.Count_overall != 0):
+                    global prevPiValue;
+                    global piValue;
+                    __main__.prevPiValue = __main__.piValue;
+                    __main__.piValue = 4 * (self.Count_hit / self.Count_overall);
+                    Visual.text_estimate();
+
+
                 print "Ciagle licze, jestem na..", self.iterator;
+
 
         if (self.Count_overall !=0):
             self.wynik = 4 *(self.Count_hit / self.Count_overall);

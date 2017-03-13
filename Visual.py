@@ -1,3 +1,4 @@
+import __main__
 import pygame;
 import sys;
 import MonteCarlo;
@@ -17,37 +18,56 @@ class Visual:
     window_width = 1080;
     window_height = 720;
     radius = window_height * window_width / 4000;
-    piValue = 0;
+    gameDisplay = 0;
+    myfont = pygame.font.SysFont("monospace", (window_width * window_height) / 35000)
 
     def __init__ (self):
-        gameDisplay = pygame.display.set_mode((self.window_width, self.window_height), pygame.RESIZABLE)
+        self.gameDisplay = pygame.display.set_mode((self.window_width, self.window_height), pygame.RESIZABLE)
         pygame.display.set_caption('Pi Monte Carlo Mikolaj Balcerek s416040')
         self.clock = pygame.time.Clock();
 
 
-        gameDisplay.fill(self.white);
+        self.gameDisplay.fill(self.white);
 
-        myfont = pygame.font.SysFont("monospace", (self.window_width * self.window_height) / 35000)
 
-        podpis = myfont.render("Mikolaj Balcerek s416040", 1, (0, 0, 0))
-        piEstimate = myfont.render("Current Pi approximation: " + str(self.piValue), 1, self.red);
 
-        instructions = myfont.render("Press SPACEBAR or s to start and resume..", 1, (0, 0, 0))
-        gameDisplay.blit(podpis, (0, 0));
-        gameDisplay.blit(instructions, (0, 0.95 * self.window_height));
-        gameDisplay.blit(piEstimate, (0, self.window_height/1.6));
+        podpis = self.myfont.render("Mikolaj Balcerek s416040", 1, (0, 0, 0))
 
-        pygame.draw.circle(gameDisplay, 30, [self.window_width/2, self.window_height/2], (self.window_height * self.window_width) / 4000, 2);
+        self.text_estimate();
 
-        pygame.draw.line(gameDisplay, 0, [0, self.window_height/2], [self.window_width, self.window_height/2], 2);
-        pygame.draw.line(gameDisplay, 0, [self.window_width/2, self.window_height], [self.window_width/2, 0], 2);
+        instructions = self.myfont.render("Press SPACEBAR or s to start and resume..", 1, (0, 0, 0))
+        self.gameDisplay.blit(podpis, (0, 0));
+        self.gameDisplay.blit(instructions, (0, 0.95 * self.window_height));
+
+        pygame.draw.circle(self.gameDisplay, 30, [self.window_width/2, self.window_height/2], (self.window_height * self.window_width) / 4000, 2);
+
+        pygame.draw.line(self.gameDisplay, 0, [0, self.window_height/2], [self.window_width, self.window_height/2], 2);
+        pygame.draw.line(self.gameDisplay, 0, [self.window_width/2, self.window_height], [self.window_width/2, 0], 2);
 
         pygame.display.update();
         self.clock.tick(self.FPS);
 
 
+    def text_estimate(self):
+        global prevPiValue;
+        piprevEstimate = self.myfont.render("Current Pi approximation: " + str(__main__.prevPiValue), 500, self.white);
+        self.gameDisplay.blit(piprevEstimate, (0, self.window_height * 0.9));
+
+
+        global piValue;
+        piEstimate = self.myfont.render("Current Pi approximation: " + str(__main__.piValue), 1, self.red);
+
+        self.gameDisplay.blit(piEstimate, (0, self.window_height * 0.9));
+        pygame.display.update();
+        self.clock.tick(self.FPS);
+
+
     def loop_wizualizacja(self, MonteCarlo):
+
         while not self.gameExit:  # game_loop
+            pygame.display.update();
+            self.clock.tick(self.FPS);
+
             for event in pygame.event.get():  # event_loop
                 if event.type == pygame.QUIT:
                     gameExit = True;
@@ -64,7 +84,7 @@ class Visual:
                         quit();
                         sys.quit();
                     if event.key == pygame.K_KP_ENTER or event.key == pygame.K_SPACE or event.key == pygame.K_s:
-                        MonteCarlo.calulatePi();
+                        MonteCarlo.calulatePi(self);
 
 
                 if event.type == pygame.VIDEORESIZE:
