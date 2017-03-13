@@ -19,3 +19,4 @@ Python 2.7.X
 Korzysta z pygame do wizualizacji.
 
 Wyjście z programu na escape, q, graficzna obsługa myszką
+Program stworzony jako zadanie na przedmiot "Fizyka dla Informatyków", Informatyka, II rok
