@@ -50,23 +50,22 @@ class MonteCarlo:
             # Czy punkt zawiera sie w kole?
             distance = math.hypot(point[0] - self.center[0], point[1] - self.center[1]);
             # print "Odlegosc od srodka: ", distance;
-
+            Visual.draw_point(self, point[0], point[1]);
 
             if (distance <= self.r):
                 self.Count_hit = self.Count_hit + 1;
 
             self.Count_overall = self.Count_overall + 1;
 
-            if (self.iterator % 100000 == 0):
-                if (self.Count_overall != 0):
-                    global prevPiValue;
-                    global piValue;
-                    __main__.prevPiValue = __main__.piValue;
-                    __main__.piValue = 4 * (self.Count_hit / self.Count_overall);
-                    Visual.text_estimate();
+            if (self.Count_overall != 0):
+                global prevPiValue;
+                global piValue;
+                __main__.prevPiValue = __main__.piValue;
+                __main__.piValue = 4 * (self.Count_hit / self.Count_overall);
+                Visual.text_estimate();
 
 
-                print "Ciagle licze, jestem na..", self.iterator;
+
 
 
         if (self.Count_overall !=0):

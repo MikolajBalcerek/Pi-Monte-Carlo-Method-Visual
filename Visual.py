@@ -38,8 +38,8 @@ class Visual:
         instructions = self.myfont.render("Press SPACEBAR or s to start and resume..", 1, (0, 0, 0))
         self.gameDisplay.blit(podpis, (0, 0));
         self.gameDisplay.blit(instructions, (0, 0.95 * self.window_height));
-
-        pygame.draw.circle(self.gameDisplay, 30, [self.window_width/2, self.window_height/2], (self.window_height * self.window_width) / 4000, 2);
+        self.radius = self.window_height * self.window_width / 4000;
+        pygame.draw.circle(self.gameDisplay, 30, [self.window_width/2, self.window_height/2], self.radius, 2);
 
         pygame.draw.line(self.gameDisplay, 0, [0, self.window_height/2], [self.window_width, self.window_height/2], 2);
         pygame.draw.line(self.gameDisplay, 0, [self.window_width/2, self.window_height], [self.window_width/2, 0], 2);
@@ -47,6 +47,11 @@ class Visual:
         pygame.display.update();
         self.clock.tick(self.FPS);
 
+    def draw_point(self, MonteCarlo, x, y):
+        stosunek =  self.radius / MonteCarlo.r ;
+        x = self.window_width/2 + (x * stosunek);
+        y = self.window_height/2 - (y * stosunek);
+        pygame.draw.circle(self.gameDisplay, self.red, [int(x),int(y)], int(0.06 * stosunek));
 
     def text_estimate(self):
         global prevPiValue;
