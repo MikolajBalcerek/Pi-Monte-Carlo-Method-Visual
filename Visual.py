@@ -50,12 +50,12 @@ class Visual:
 
     def text_estimate(self):
         global prevPiValue;
-        piprevEstimate = self.myfont.render("Current Pi approximation: " + str(__main__.prevPiValue), 500, self.white);
+        piprevEstimate = self.myfont.render("Current Pi approximation: " + str(__main__.prevPiValue), 0, self.white);
         self.gameDisplay.blit(piprevEstimate, (0, self.window_height * 0.9));
 
 
         global piValue;
-        piEstimate = self.myfont.render("Current Pi approximation: " + str(__main__.piValue), 1, self.red);
+        piEstimate = self.myfont.render("Current Pi approximation: " + str(__main__.piValue), 0, self.red);
 
         self.gameDisplay.blit(piEstimate, (0, self.window_height * 0.9));
         pygame.display.update();
