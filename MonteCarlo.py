@@ -16,7 +16,7 @@ class MonteCarlo:
     wynik = 0;
     iterator = 0;
 
-    def __breakup__(self):
+    def __breakup__(self, Visual):
         for event in pygame.event.get():  # event_loop
             if event.type == pygame.QUIT:
                 gameExit = True;
@@ -33,10 +33,14 @@ class MonteCarlo:
                     sys.quit();
                 if event.key == pygame.K_KP_ENTER or event.key == pygame.K_SPACE or event.key == pygame.K_s:
                     return True;
+            if event.type == pygame.VIDEORESIZE:
+                Visual.window_height = event.h;
+                Visual.window_width = event.w;
+                Visual.__init__();
 
     def calulatePi(self, Visual):
 
-        while not (self.__breakup__()):
+        while not (self.__breakup__(Visual)):
 
             self.iterator = self.iterator + 1;
             # losuje punkt
