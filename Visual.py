@@ -14,18 +14,24 @@ class Visual:
     red = (255, 0, 0)
     green = (0, 255, 0)
     blue = (0, 0, 255)
-    window_width = 1000;
-    window_height = 1000;
-
-    myfont = pygame.font.SysFont("monospace", 15)
-    podpis = myfont.render("Mikolaj Balcerek s416040", 1, (0, 0, 0))
+    window_width = 1080;
+    window_height = 720;
 
     def __init__ (self):
         gameDisplay = pygame.display.set_mode((self.window_width, self.window_height), pygame.RESIZABLE)
         pygame.display.set_caption('Pi Monte Carlo Mikolaj Balcerek s416040')
         self.clock = pygame.time.Clock();
+
+
         gameDisplay.fill(self.white);
-        gameDisplay.blit(self.podpis, (0, 0));
+
+        myfont = pygame.font.SysFont("monospace", (self.window_width * self.window_height) / 35000)
+        podpis = myfont.render("Mikolaj Balcerek s416040", 1, (0, 0, 0))
+        gameDisplay.blit(podpis, (0, 0));
+
+        pygame.draw.circle(gameDisplay, 30, [self.window_width/2, self.window_height/2], (self.window_height * self.window_width) / 4000, 2);
+
+
         pygame.display.update();
         self.clock.tick(self.FPS);
 
