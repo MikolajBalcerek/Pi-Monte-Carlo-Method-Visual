@@ -41,6 +41,8 @@ class Visual:
         self.radius = self.window_height * self.window_width / 4000;
         pygame.draw.circle(self.gameDisplay, 30, [self.window_width/2, self.window_height/2], self.radius, 2);
 
+        pygame.draw.rect(self.gameDisplay, self.black, [self.window_width/2 - self.radius, self.window_height/2 - self.radius, 2 * self.radius, 2*self.radius], 2 )
+
         pygame.draw.line(self.gameDisplay, 0, [0, self.window_height/2], [self.window_width, self.window_height/2], 2);
         pygame.draw.line(self.gameDisplay, 0, [self.window_width/2, self.window_height], [self.window_width/2, 0], 2);
 
