@@ -1,5 +1,5 @@
-# Pi-Monte-Carlo-Method-Visual
-Approximate the value of Pi using Monte Carlo Method  
+![gif of the application in action](https://lh3.googleusercontent.com/7MrRhNdN6iaNpGHGm9BBTct8vXk04tgOpj1girAcn7aSv6zUXryvrX4OzuWK86ONSjksoAFdx4PzzVk=w2736-h1516)
+# Approximate the value of Pi using Monte Carlo Method 
 Includes a graphic representation, start, stop and resume calculations mechanism (on s and spacebar).  
 Supports window resizing.
 
