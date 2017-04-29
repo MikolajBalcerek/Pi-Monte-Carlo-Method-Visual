@@ -1,4 +1,4 @@
-![gif of the application in action](http://imgur.com/PEghmMt)
+![gif of the application in action](http://i.imgur.com/PEghmMt.gif)
 # Approximate the value of Pi using Monte Carlo Method 
 Includes a graphic representation, start, stop and resume calculations mechanism (on s and spacebar).  
 Supports window resizing.
