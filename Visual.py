@@ -2,6 +2,9 @@ import __main__
 import pygame;
 import sys;
 import MonteCarlo;
+import pygame, pygame.font, pygame.event, pygame.draw, string
+from pygame.locals import *
+
 
 class Visual:
     gameExit = False;
@@ -49,11 +52,15 @@ class Visual:
         pygame.display.update();
         self.clock.tick(self.FPS);
 
-    def draw_point(self, MonteCarlo, x, y):
+    def draw_point(self, MonteCarlo, x, y, hit):
         stosunek =  self.radius / MonteCarlo.r ;
         x = self.window_width/2 + (x * stosunek);
         y = self.window_height/2 - (y * stosunek);
-        pygame.draw.circle(self.gameDisplay, self.red, [int(x),int(y)], int(0.06 * stosunek));
+        if (hit == False):
+                pygame.draw.circle(self.gameDisplay, self.blue, [int(x), int(y)], int(0.06 * stosunek));
+        else:
+                pygame.draw.circle(self.gameDisplay, self.red, [int(x), int(y)], int(0.06 * stosunek));
+
 
     def text_estimate(self):
         global prevPiValue;

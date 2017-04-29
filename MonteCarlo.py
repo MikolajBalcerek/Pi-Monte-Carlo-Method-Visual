@@ -5,6 +5,7 @@ import pygame;
 import sys;
 import __main__
 
+
 class MonteCarlo:
 
     random.seed();  # Ustawiam random od czasu
@@ -42,20 +43,25 @@ class MonteCarlo:
 
         while not (self.__breakup__(Visual)):
 
+            hit = False;
             self.iterator = self.iterator + 1;
             # losuje punkt
-            point = (random.uniform(self.center[0], self.center[0] + self.r), random.uniform(self.center[1], self.center[1] + self.r));
+            point = (random.uniform(self.center[0] - self.r, self.center[0] + self.r), random.uniform(self.center[1] - self.r, self.center[1] + self.r));
             # print "Wylosowany punkt: " , "\n X:", point[0], "\n Y:", point[1];
 
             # Czy punkt zawiera sie w kole?
             distance = math.hypot(point[0] - self.center[0], point[1] - self.center[1]);
-            # print "Odlegosc od srodka: ", distance;
-            Visual.draw_point(self, point[0], point[1]);
 
             if (distance <= self.r):
                 self.Count_hit = self.Count_hit + 1;
+                hit = True;
+
 
             self.Count_overall = self.Count_overall + 1;
+
+            # print "Odlegosc od srodka: ", distance;
+            Visual.draw_point(self, point[0], point[1], hit);
+
 
             if (self.Count_overall != 0):
                 global prevPiValue;
@@ -64,10 +70,21 @@ class MonteCarlo:
                 __main__.piValue = 4 * (self.Count_hit / self.Count_overall);
                 Visual.text_estimate();
 
+            if (self.Count_overall != 0):
+                self.wynik = 4 * (self.Count_hit / self.Count_overall);
+
+            if (self.Count_overall % 100 == 0):
+                print "--STATUS RAPORT--";
+                print "Overall count: "
+                print self.Count_overall;
+                print "Number of points inside the circle: "
+                print self.Count_hit;
+                print "Pi estimate: "
+                print self.wynik
+                print "--END OF STATUS REPORT-- \n"
 
 
 
 
-        if (self.Count_overall !=0):
-            self.wynik = 4 *(self.Count_hit / self.Count_overall);
-            print self.wynik;
+
+
